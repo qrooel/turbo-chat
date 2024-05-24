@@ -13,7 +13,16 @@ class Message < ApplicationRecord
   after_create_commit do
     notify_recipients
     update_parent_room
-    broadcast_append_later_to room
+
+    # broadcast_append_later_to room
+    broadcast_append_later_to(room,
+      target: 'messages',
+      partial: 'messages/message',
+      locals: {
+        message: self
+      }
+    )
+
     broadcast_to_home_page
   end
 

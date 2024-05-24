@@ -8,12 +8,15 @@
 dean = User.create(email: 'dean@example.com',
                    password: 'password',
                    password_confirmation: 'password',
-                   role: 'admin')
+                   role: 'admin',
+                   username:'admin')
 User.create(email: 'john@doe.com',
             password: 'password',
-            password_confirmation: 'password')
+            password_confirmation: 'password',
+            username:'john')
 User.create(email: 'jane@doe.com',
             password: 'password',
-            password_confirmation: 'password')
+            password_confirmation: 'password',
+            username:'jane')
 dean.joined_rooms << Room.create(name: 'General', is_private: false)
 dean.joined_rooms << Room.create(name: 'Testing', is_private: false)
