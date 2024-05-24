@@ -4,4 +4,5 @@
 /turbo_chatroom/log
 /turbo_chatroom/tmp
 /turbo_chatroom/db/development.sqlite3
+/turbo_chatroom/.idea
 
