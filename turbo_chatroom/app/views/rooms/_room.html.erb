@@ -17,9 +17,9 @@
       </div>
     </div>
     <%= turbo_frame_tag [dom_id(room), "last_message"] do %>
-      <%= render "rooms/last_message", 
-        room: room, 
-        user: user, 
+      <%= render "rooms/last_message",
+        room: room,
+        user: user,
         last_message: last_message %>
     <% end %>
   </li>
