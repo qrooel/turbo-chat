@@ -1,0 +1,7 @@
+= turbo_frame_tag dom_id(message) do
+  .border-b-2.border-slate-700.pb-2
+    .details.text-sm
+      %span #{time_ago_in_words(message.created_at)} ago
+      %span.pl-4 ##{message.room_name}
+      %span.pl-4= message.username
+      .mt-2= message.body

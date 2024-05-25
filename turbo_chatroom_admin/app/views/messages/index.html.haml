@@ -1,0 +1,7 @@
+.flex-initial.mt-10{class: 'w-1/2'}
+  %h1.underline.text-3xl Messages
+
+  = turbo_stream_from 'messages'
+  #messages.mt-10
+    - @messages.each do |message|
+      = render partial: 'messages/message', locals: { message: message }
