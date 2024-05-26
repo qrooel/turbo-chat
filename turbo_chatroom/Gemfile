@@ -87,3 +87,5 @@ gem "groupdate", "~> 6.1"
 
 gem "awesome_print"
 gem "pry"
+gem 'sidekiq'
+gem 'sidekiq-scheduler'

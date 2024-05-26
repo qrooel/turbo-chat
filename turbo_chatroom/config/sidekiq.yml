@@ -1,0 +1,9 @@
+concurrency: 2
+queues:
+  - message
+scheduler:
+  schedule:
+   update_message_event_worker:
+     cron: "*/2 * * * * *" # Runs every 2 seconds
+     class: UpdateMessageEventWorker
+     queue: message
