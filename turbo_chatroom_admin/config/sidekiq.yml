@@ -1,0 +1,9 @@
+concurrency: 1
+queues:
+  - messages
+scheduler:
+  schedule:
+   receive_messages_event_worker:
+     cron: "*/2 * * * * *" # Runs every 2 seconds
+     class: ReceiveMessagesEventWorker
+     queue: messages

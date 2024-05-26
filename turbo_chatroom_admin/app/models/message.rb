@@ -2,6 +2,8 @@ class Message < ApplicationRecord
   belongs_to :user
   belongs_to :room
 
+  has_many_attached :attachments
+
   delegate :username, to: :user
   delegate :name, to: :room, prefix: true
 
