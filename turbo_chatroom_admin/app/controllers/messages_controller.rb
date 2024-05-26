@@ -1,8 +1,10 @@
 class MessagesController < ApplicationController
   include ActiveStorage::SetCurrent
 
+  before_action :authenticate_user!
+
   def index
-    @messages = Message.order(created_at: :asc).last(2)
+    @messages = Message.order(created_at: :asc).last(5)
   end
 
   def hide

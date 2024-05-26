@@ -11,4 +11,9 @@
     = javascript_importmap_tags
 
   %body.bg-slate-800.text-slate-300.flex.justify-center
+    - if current_user
+      .absolute.right-20.top-4
+        .inline.pr-6= "#{current_user.email} (#{current_user.role})"
+        = link_to "Sign out", destroy_user_session_path, remote: true
+
     = yield

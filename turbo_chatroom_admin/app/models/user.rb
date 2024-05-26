@@ -4,6 +4,5 @@ class User < ApplicationRecord
 
   has_many :messages
 
-
-
+  enum role: %i[user admin]
 end

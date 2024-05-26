@@ -1,0 +1,23 @@
+.text-center.mt-10{class: 'w-1/2'}
+  %h1.underline.text-3xl Log In
+
+  .mt-10
+    - if flash[:alert]
+      .bg-red-500.text-white.font-bold.rounded-t.px-4.py-2
+        Error
+      .border.border-t-0.border-red-400.rounded-b.bg-red-100.px-4.py-3.text-red-700
+        %p= flash[:alert]
+
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .mt-4
+        = f.label :email, class: 'block'
+        = f.email_field :email, autofocus: true, autocomplete: "dean@example.com", class: 'bg-slate-700'
+        .text-xs dean@example.com
+
+      .mt-4
+        = f.label :password, class: 'block'
+        = f.password_field :password, autocomplete: "password", class: 'bg-slate-700'
+        .text-xs password
+
+      .mt-4
+        = f.submit "Log in", class: 'bg-slate-700 hover:bg-slate-500 hover:cursor-pointer text-white font-bold py-2 px-4 border border-blue-700 rounded'

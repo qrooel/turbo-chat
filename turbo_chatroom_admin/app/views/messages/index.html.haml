@@ -1,7 +1,8 @@
 .flex-initial.mt-10{class: 'w-1/2'}
-  %h1.underline.text-3xl Messages
+  %h1.text-center.underline.text-3xl Messages
 
-  %p Filters here, by room name
+  -# %p Dockerize apps
+  -# %p Do we need #to_json for Redis? Do check it
 
   = turbo_stream_from 'messages'
   #messages.mt-10

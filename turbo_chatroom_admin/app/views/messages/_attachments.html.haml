@@ -1,5 +1,5 @@
-- if message.attachments.attached?
-  - message.attachments.each do |attachment|
+-# - if message.attachments.attached?
+-#   - message.attachments.each do |attachment|
     -# = image_tag attachment.url(host: "localhost:3000")
     -# = image_tag "http://localhost:3000#{rails_blob_url(attachment, only_path: true)}"
-    -# = image_tag(attachment.variant(resize_to_limit: [150, 150]).processed, only_path: true, host: 'a')
+    -# = image_tag(url_for(attachment.variant(resize_to_limit: [150, 150]).processed))
