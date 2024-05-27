@@ -1,9 +1,6 @@
 .flex-initial.mt-10{class: 'w-1/2'}
   %h1.text-center.underline.text-3xl Messages
 
-  -# %p Dockerize apps
-  -# %p Do we need #to_json for Redis? Do check it
-
   = turbo_stream_from 'messages'
   #messages.mt-10
     - @messages.each do |message|

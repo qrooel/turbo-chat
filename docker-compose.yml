@@ -1,10 +1,12 @@
-version: '3'
+version: "3.8"
 
 services:
   redis:
     ports:
       - "6379:6379"
     image: "redis:alpine"
+    networks:
+      - mynetwork
 
   postgres:
     image: postgres:latest
@@ -12,3 +14,93 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_PASSWORD: postgres
+    networks:
+      - mynetwork
+
+  turbo_chatroom_web:
+    build: ./turbo_chatroom
+    working_dir: /application/turbo_chatroom
+    tty: true
+    stdin_open: true
+    command: sh -c "rm -rf tmp/pids/server.pid && bundle exec rails s -b 0.0.0.0 -p 3000"
+    environment:
+      - RAILS_ENV=development
+      - REDIS_URL=redis://redis:6379/1
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - .:/application
+    networks:
+      - mynetwork
+
+  turbo_chatroom_sidekiq:
+    build: ./turbo_chatroom
+    working_dir: /application/turbo_chatroom
+    command: sh -c "bundle exec sidekiq"
+    environment:
+      - RAILS_ENV=development
+      - REDIS_URL=redis://redis:6379/1
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - .:/application
+    networks:
+      - mynetwork
+
+  turbo_chatroom_admin_web:
+    build: ./turbo_chatroom_admin
+    working_dir: /application/turbo_chatroom_admin
+    tty: true
+    stdin_open: true
+    command: sh -c "rm -rf tmp/pids/server.pid && bundle exec rails s -b 0.0.0.0 -p 3003"
+    environment:
+      - RAILS_ENV=development
+      - REDIS_URL=redis://redis:6379/1
+    ports:
+      - 3003:3003
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - .:/application
+    networks:
+      - mynetwork
+
+  turbo_chatroom_admin_tailwind_watcher:
+    build: ./turbo_chatroom_admin
+    working_dir: /application/turbo_chatroom_admin
+    tty: true
+    stdin_open: true
+    command: sh -c "bundle exec rails tailwindcss:watch"
+    environment:
+      - RAILS_ENV=development
+      - REDIS_URL=redis://redis:6379/1
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - .:/application
+    networks:
+      - mynetwork
+
+  turbo_chatroom_admin_sidekiq:
+    build: ./turbo_chatroom_admin
+    working_dir: /application/turbo_chatroom_admin
+    command: sh -c "bundle exec sidekiq"
+    environment:
+      - RAILS_ENV=development
+      - REDIS_URL=redis://redis:6379/1
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - .:/application
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
