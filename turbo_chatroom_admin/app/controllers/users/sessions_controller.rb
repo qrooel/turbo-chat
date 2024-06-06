@@ -9,9 +9,10 @@ module Users
     def check_user_role
       user = User.find_by(email: params[:user][:email])
 
-      if user.present? && !user.admin?
-        redirect_to new_user_session_path, alert: 'You are not authorized.'
-      end
+      # if user.present?# && !user.admin?
+      #   redirect_to new_user_session_path, alert: 'You are not authorized.'
+      # end
+      true
     end
 
   end

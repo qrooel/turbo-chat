@@ -11,7 +11,13 @@ class ReceiveMessagesEventWorker
       redis_entry_id = message_entry.first
       message_attributes = JSON.parse(message_entry.last["request"])
 
-      if Message.find(message_attributes['message_id']).broadcast_message
+      message = Message.create!(
+        id: message_attributes['message_id'],
+        body: message_attributes['body'],
+        user_id: message_attributes['user_id']
+      )
+
+      if message.broadcast_message
         $redis.xdel('messages', redis_entry_id)
       end
     end

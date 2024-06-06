@@ -1,11 +1,10 @@
 class Message < ApplicationRecord
-  belongs_to :user
-  belongs_to :room
+  belongs_to :user, optional: true
 
-  has_many_attached :attachments
+  # has_many_attached :attachments
 
-  delegate :username, to: :user
-  delegate :name, to: :room, prefix: true
+  # delegate :username, to: :user
+  # delegate :name, to: :room, prefix: true
 
   def broadcast_message
     broadcast_append_later_to(

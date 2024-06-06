@@ -9,8 +9,10 @@ class MessagesController < ApplicationController
 
   def hide
     @message = Message.find(params[:id])
-    @message.update(hidden: true)
-    $redis.xadd "message-update", { request: { message_id: @message.id }.to_json }
+
+    if @message.destroy
+      $redis.xadd "message-update", { request: { message_id: @message.id }.to_json }
+    end
 
     render turbo_stream:
       turbo_stream.update(@message,

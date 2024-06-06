@@ -7,6 +7,6 @@ default: &default
 
 development:
   <<: *default
-  database: turbo_chatroom_dev
+  database: turbo_chatroom_admin_dev
   username: postgres
   password: postgres
